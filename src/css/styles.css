@@ -24,10 +24,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  margin: 8px;
-}
-
 a {
   display: block;
   text-decoration: none;
@@ -43,19 +39,44 @@ ul,
 ol {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 36px 156px;
+  align-items: center;
+  padding: 36px 12px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 32px;
+  width: 395px;
+}
+
+/* It looks terrible when we download odd number of images on tablets, but why not? */
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+  }
+}
+
+/* Show 3 images per row on laptops */
+@media screen and (min-width: 1152px) {
+  .container {
+    width: 1152px;
+  }
+}
+
+/* Show 5 images per row on desktops */
+@media screen and (min-width: 1920px) {
+  .container {
+    width: 1920px;
+  }
 }
 
 .search-form {
   display: flex;
   justify-content: center;
-  margin-bottom: 32px;
   gap: 8px;
 }
 
@@ -95,116 +116,35 @@ ol {
   background-color: #6c8cff;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
-}
-
 .loader {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 48px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  display: inline-block;
+  color: #ff3d00;
+  letter-spacing: 2px;
   position: relative;
-  height: 32px;
-  width: 200px;
-  background: #fff;
-  border: 2px solid #fff;
-  color: red;
-  overflow: hidden;
+  box-sizing: border-box;
 }
-.loader::before {
-  content: '';
-  background: red;
+.loader::after {
+  content: 'Loading';
   position: absolute;
   left: 0;
   top: 0;
-  width: 0;
-  height: 100%;
-  animation: loading 10s linear infinite;
-}
-.loader:after {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
+  color: #fff;
   width: 100%;
   height: 100%;
-  text-align: center;
-  font-size: 24px;
-  line-height: 32px;
-  color: rgb(0, 255, 255);
-  mix-blend-mode: difference;
-  animation: percentage 10s linear infinite;
+  overflow: hidden;
+  box-sizing: border-box;
+  animation: animloader 6s linear infinite;
 }
 
-@keyframes loading {
+@keyframes animloader {
   0% {
-    width: 0;
+    height: 100%;
   }
   100% {
-    width: 100%;
-  }
-}
-@keyframes percentage {
-  0% {
-    content: '0%';
-  }
-  5% {
-    content: '5%';
-  }
-  10% {
-    content: '10%';
-  }
-  20% {
-    content: '20%';
-  }
-  30% {
-    content: '30%';
-  }
-  40% {
-    content: '40%';
-  }
-  50% {
-    content: '50%';
-  }
-  60% {
-    content: '60%';
-  }
-  70% {
-    content: '70%';
-  }
-  80% {
-    content: '80%';
-  }
-  90% {
-    content: '90%';
-  }
-  95% {
-    content: '95%';
-  }
-  96% {
-    content: '96%';
-  }
-  97% {
-    content: '97%';
-  }
-  98% {
-    content: '98%';
-  }
-  99% {
-    content: '99%';
-  }
-  100% {
-    content: '100%';
+    height: 0%;
   }
 }
 
@@ -256,6 +196,28 @@ ol {
 .accent {
   font-weight: 600;
   line-height: 1.33333;
+}
+
+.load-more-btn {
+  width: 125px;
+  height: 40px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: #4e75ff;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-weight: 500;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.load-more-btn:hover,
+.load-more-btn:focus {
+  background-color: #6c8cff;
+}
+
+.hidden {
+  display: none;
 }
 
 .sl-overlay {
